@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml" ng-app="myApp">
+<head>
+<meta charset="UTF-8">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<title>vtv</title>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.resource.js"></script>
+<script src='/js/combosAnidados.js'></script>
+</head>
+<body>
+	<header th:replace="layout/plantilla :: header"></header>
+	<h2 class="text-center">Datos del automovil</h2>
+	<a class="btn btn-secondary m-2" th:href="@{/listaAutomoviles/}">Regresar</a>
+	<br/>
+	<form class="container" th:action="@{/listaAutomoviles/guardarAutomovil}" method="post" th:object="${automovil}">	
+		<label class="form-label" for="dominio">Dominio:</label>
+		<input class="form-control" type="text" name="dominio" th:field="*{dominio}"/>
+		<span th:if="${#fields.hasErrors('dominio')}" th:errors="*{dominio}">Dominio error</span>
+		<br/>
+		<div ng-app="myApp" ng-controller="ControladorAutomoviles">
+			<label class="form-label" for="marca">Marca:</label>
+			<select class="form-select" th:field="*{marca}" ng-model="marca" ng-options="marca.nombre for marca in datos track by marca.id">
+			 	<option value="" disabled="disabled" selected>Seleccionar Marca</option>
+			</select>
+			<span th:if="${#fields.hasErrors('marca')}" th:errors="*{marca}">Marca error</span>
+			<br/>
+			<label class="form-label" for="modelo">Modelo:</label>
+			<select class="form-select" th:field="*{modelo}"  ng-model="modelo" ng-options="modelo.nombre for modelo in marca.modelos track by modelo.id">
+				<option value="" disabled="disabled" selected>Seleccionar Modelo</option>
+			</select>
+			<span th:if="${#fields.hasErrors('modelo')}" th:errors="*{modelo}">Modelo error</span>
+			<br/>
+			<label class="form-label" for="version">Version:</label>
+			<select class="form-select" th:field="*{version}"  ng-model="version" ng-options="version.nombre for version in modelo.versiones track by version.idversion">
+				<option value="" disabled="disabled" selected>Seleccionar Version</option>
+			</select>
+			<span th:if="${#fields.hasErrors('version')}" th:errors="*{version}">Version error</span>
+			<br/>
+		</div>
+		<label class="form-label" for="propietario">Propietario:</label>
+		<select class="form-select" th:field="*{propietario}">
+			<option th:each="prop:${propietario}" th:value="${prop.dnipersona}" th:text="${prop.nombre} +' '+${prop.apellido}+' '+${prop.dnipersona}"></option>
+		</select>
+		<br/>
+		<input class="btn btn-primary my-2" type="submit" name="guardarAutomovil" value="Guardar"/>
+	</form>
+	<footer th:replace="layout/plantilla :: footer"></footer>
+
+</body>
+</html>
