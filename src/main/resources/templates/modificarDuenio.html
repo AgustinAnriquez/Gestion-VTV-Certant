@@ -13,7 +13,7 @@
 	<form class="container" th:action="@{/listaDuenios/guardarDuenio}" method="post" th:object="${duenio}">
 		
 		<label class="form-label" for="dnipersona">Dni:</label>
-		<input class="form-control" type="text" name="dni" th:field="*{dnipersona}"/>
+		<input class="form-control" type="number" name="dni" th:field="*{dnipersona}"/>
 		<span th:if="${#fields.hasErrors('dnipersona')}" th:errors="*{dnipersona}">Dni error</span>
 		<br/>
 		<label class="form-label" for="nombre">Nombre:</label>
@@ -29,6 +29,7 @@
 			<option th:value="comun" th:text="comun">
 			<option th:value="exento" th:text="exento">
 		</select>
+		<span th:if="${#fields.hasErrors('tipo')}" th:errors="*{tipo}">Tipo error</span>
 		<br/>
 		<input class="btn btn-primary my-2" type="submit" name="guardarDuenio" value="Guardar"/>
 	</form>

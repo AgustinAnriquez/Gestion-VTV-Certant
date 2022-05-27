@@ -1,5 +1,6 @@
 package com.agustin.vtv.web;
 
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ public class ControladorDuenios {
 	
 	@Autowired
 	private DuenioService duenioService;
+	
 		
 	@GetMapping("/")
 	public String listaDuenios(Model model) {
@@ -39,18 +41,26 @@ public class ControladorDuenios {
 	
 	@PostMapping("/guardarDuenio")
 	public String guardarDuenio(@Valid Duenio duenio, BindingResult result) {
-		String dnipersona = String.valueOf(duenio.getDnipersona());
-		if(dnipersona.length()==0) {
-			FieldError error = new FieldError("duenio", "dnipersona", "El dni de la persona no puede ser 0");
+		if(duenio.getDnipersona()==null) {
+			FieldError error = new FieldError("duenio", "dnipersona", "El dni no puede estar vacio");
 			result.addError(error);
-		}
-
-		if(dnipersona.length()>8 || dnipersona.length()<7) {
-			FieldError error = new FieldError("duenio", "dnipersona", "Los caracteres del dni deben ser 7 como minimo y 8 como maximo");
-			result.addError(error);
-		}
+		}else {
+			if(duenioService.encontrarDuenio(duenio)!=null) {
+				FieldError error = new FieldError("duenio", "dnipersona", "Ya existe un propietario con ese dni");
+				result.addError(error);
+			}
+		}		
 		if(result.hasErrors()) {
 			return "modificarDuenio";
+		}
+		duenioService.guardarDuenio(duenio);
+		return "redirect:/listaDuenios/";
+	}
+	
+	@PostMapping("/guardarDuenioYaExistente")
+	public String guardarDuenioYaExistente(@Valid Duenio duenio, BindingResult result) {
+		if(result.hasErrors()) {
+			return "editarDuenio";
 		}
 		duenioService.guardarDuenio(duenio);
 		return "redirect:/listaDuenios/";
@@ -60,8 +70,9 @@ public class ControladorDuenios {
 	public String editarDuenio(Duenio duenio, Model model) {
 		duenio = duenioService.encontrarDuenio(duenio);
 		model.addAttribute("duenio", duenio);
-		return "modificarDuenio";
+		return "editarDuenio";
 	}
+	
 	
 	@GetMapping("/eliminarDuenio/{dnipersona}")
 	public String eliminarDuenio(Duenio duenio) {

@@ -9,4 +9,12 @@ import javax.persistence.Table;
 @PrimaryKeyJoinColumn(referencedColumnName = "dominio")
 public class Automovil extends Vehiculo{
      
+	public Automovil() {
+		
+	}
+	
+	public Automovil(String dominio, Marcas marca, Modelos modelo, Version version, Duenio propietario) {
+		super(dominio, marca, modelo, version, propietario);
+	}
+	
 }

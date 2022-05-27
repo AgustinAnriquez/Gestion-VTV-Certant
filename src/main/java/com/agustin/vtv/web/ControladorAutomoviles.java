@@ -60,44 +60,9 @@ public class ControladorAutomoviles {
 	@PostMapping("/guardarAutomovil")
 	public String guardarAutomovil(@Valid Automovil automovil, BindingResult result, Model model) {
 		
-		if (automovil.getDominio().length()>7 || automovil.getDominio().length()<7) {
-			FieldError error = new FieldError("automovil", "dominio", "La patente debe tener 7 digitos");
+		if (automovilService.encontrarAutomovil(automovil) != null) {
+			FieldError error = new FieldError("automovil", "dominio", "Ya existe automovil cargado con esa patente");
 			result.addError(error);
-		}
-		if (automovil.getDominio().length()==7) {
-			boolean esLetra = true;
-			for (int i = 0; i < 2; i++) {
-	            if (!Character.isLetter(automovil.getDominio().charAt(i))) {
-	                esLetra= false;
-	            }
-	        }
-			if (esLetra==false) {
-				FieldError error = new FieldError("automovil", "dominio", "Los primeros dos caracteres deben ser letras para que sea una patente valida");
-				result.addError(error);
-			}
-				
-			boolean esNumero = true;
-			for (int i = 2; i < 5; i++) {
-				if (!Character.isDigit(automovil.getDominio().charAt(i))) {
-					esNumero = false;
-		        }
-		    }
-			if (esNumero==false) {
-				FieldError error = new FieldError("automovil", "dominio", "El tercer, cuarto y quinto caracter deben ser numeros ");
-				result.addError(error);
-			}
-			
-			boolean esLetra2 = true;
-			for (int i = 5; i < 7; i++) {
-				if (!Character.isLetter(automovil.getDominio().charAt(i))) {
-			        esLetra2= false;
-			    }
-			}
-					
-			if (esLetra2==false) {
-				FieldError error = new FieldError("automovil", "dominio", "Los ultimos dos caracteres deben ser letras para que sea una patente valida");
-				result.addError(error);
-			}
 		}
 		if (automovil.getMarca() == null) {
 			FieldError error = new FieldError("automovil", "marca", "seleccione marca por favor");
@@ -105,6 +70,10 @@ public class ControladorAutomoviles {
 		}
 		if (automovil.getModelo() == null) {
 			FieldError error = new FieldError("automovil", "modelo", "seleccione modelo por favor");
+			result.addError(error);
+		}
+		if (automovil.getVersion() == null) {
+			FieldError error = new FieldError("automovil", "version", "seleccione version por favor");
 			result.addError(error);
 		}
 		if (result.hasErrors()) {
@@ -116,13 +85,22 @@ public class ControladorAutomoviles {
 		return "redirect:/listaAutomoviles/";
 	}
 	
+	@PostMapping("/guardarAutomovilYaExistente")
+	public String guardarAutomovilYaExistente(@Valid Automovil automovil, BindingResult result) {
+		if(result.hasErrors()) {
+			return "editarDuenio";
+		}
+		automovilService.guardarAutomovil(automovil);
+		return "redirect:/listaAutomoviles/";
+	}
+	
 	@GetMapping("/editarAutomovil/{dominio}")
 	public String editarAutomovil(Automovil automovil, Model model) {
 		List<Duenio> listaDeDuenios = duenioService.listarDuenios();
 		model.addAttribute("propietario", listaDeDuenios);
 		automovil = automovilService.encontrarAutomovil(automovil);
 		model.addAttribute("automovil", automovil);
-		return "modificarAutomovil";
+		return "editarAutomovil";
 	}
 	@GetMapping("/eliminarAutomovil/{dominio}")
 	public String eliminarAutomovil(Automovil automovil) {

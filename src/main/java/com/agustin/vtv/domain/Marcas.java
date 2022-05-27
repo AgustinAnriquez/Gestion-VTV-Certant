@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.Valid;
 
 @Entity
 @Table(name = "marcas")
@@ -22,6 +23,7 @@ public class Marcas {
 	@Column(name = "nombre")
 	private String nombre;
 	@OneToMany(mappedBy="marca", cascade=CascadeType.MERGE, fetch=FetchType.LAZY)
+	@Valid
 	private List<Modelos> modelos = new ArrayList<>();
 
 	public Marcas() {

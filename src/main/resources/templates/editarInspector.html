@@ -10,15 +10,9 @@
 	<h2 class="text-center">Datos de la persona</h2>
 	<a class="btn btn-secondary m-2" th:href="@{/listaInspectores/}">Regresar</a>
 	<br/>
-	<form class="container" th:action="@{/listaInspectores/guardarInspector}" method="post" th:object="${inspector}">
-		<label class="form-label" for="legajo">Legajo:</label>
-		<input class="form-control" type="text" name="legajo" th:field="*{legajo}"/>
-		<span th:if="${#fields.hasErrors('legajo')}" th:errors="*{legajo}">Legajo error</span>
-		<br/>
-		<label class="form-label" for="dnipersona">Dni:</label>
-		<input class="form-control" type="number" name="dni" th:field="*{dnipersona}"/>
-		<span th:if="${#fields.hasErrors('dnipersona')}" th:errors="*{dnipersona}">Dni error</span>
-		<br/>
+	<form class="container" th:action="@{/listaInspectores/guardarInspectorYaExistente}" method="post" th:object="${inspector}">
+		<input type="hidden" name="dnipersona" th:field="*{dnipersona}"/>
+		<input type="hidden" name="legajo" th:field="*{legajo}"/>
 		<label class="form-label" for="nombre">Nombre:</label>
 		<input class="form-control" type="text" name="nombre" th:field="*{nombre}"/>
 		<span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">Nombre error</span>

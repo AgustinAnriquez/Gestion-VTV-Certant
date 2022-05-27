@@ -6,6 +6,8 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -18,13 +20,17 @@ public class Persona {
 
     @Id
     @Column(name = "dnipersona", unique = true, nullable = false)
+    @Min(1000000)
+    @Max(99999999)
     @NotNull
-	private long dnipersona;
+	private Long dnipersona;
 	
-	@NotEmpty
+	@NotEmpty(message = "nombre no puede estar vacio")
+	@NotNull(message = "nombre no puede ser nulo")
 	private String nombre;
 	
-	@NotEmpty
+	@NotEmpty(message = "apellido no puede estar vacio")
+	@NotNull(message = "apellido no puede ser nulo")
 	private String apellido;
     
     public Persona() {}

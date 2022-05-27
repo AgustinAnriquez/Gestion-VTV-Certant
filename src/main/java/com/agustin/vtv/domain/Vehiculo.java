@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "vehiculo")
@@ -18,6 +20,8 @@ public class Vehiculo {
 	@Id
 	@Column(name = "dominio", unique = true, nullable = false)
 	@NotEmpty
+	@NotNull
+	@Pattern(regexp="([A-Z]{2}[0-9]{3}[A-Z]{2}|[A-Z]{3}[0-9]{3})", message="formato patente invalido, formatos validos=AA111AA o AAA111")
 	private String dominio;
 	
 	@ManyToOne
@@ -34,11 +38,14 @@ public class Vehiculo {
 	
 	@ManyToOne
 	@JoinColumn(name = "propietario", referencedColumnName="dnipersona")
+	@NotNull
 	private Duenio propietario;
 	
-	public Vehiculo() {}
+	public Vehiculo() {
+	}
 	
 	public Vehiculo (String dominio, Marcas marca, Modelos modelo, Version version, Duenio propietario) {
+		
 		this.dominio = dominio;
 		this.marca = marca;
 		this.modelo = modelo;

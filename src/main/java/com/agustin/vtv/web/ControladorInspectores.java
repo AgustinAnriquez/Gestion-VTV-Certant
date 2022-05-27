@@ -25,6 +25,7 @@ public class ControladorInspectores {
 	@Autowired
 	private InspectorService inspectorService;
 	
+	
 	@GetMapping("/")
 	public String listaInspectores(Model model) {
 		var inspectores = inspectorService.listarInspectores();
@@ -39,19 +40,19 @@ public class ControladorInspectores {
 	
 	@PostMapping("/guardarInspector")
 	public String guardarInspector(@Valid Inspector inspector, BindingResult result) {
-		String dnipersona = String.valueOf(inspector.getDnipersona());
-		if(dnipersona.length()==0) {
-			FieldError error = new FieldError("inspector", "dnipersona", "El dni de la persona no puede ser 0");
+		if(inspector.getDnipersona()==null) {
+			FieldError error = new FieldError("duenio", "dnipersona", "El dni no puede estar vacio");
 			result.addError(error);
-		}
-		if(dnipersona.length()>8 || dnipersona.length()<7) {
-			FieldError error = new FieldError("inspector", "dnipersona", "Los caracteres del dni deben ser 7 como minimo y 8 como maximo");
-			result.addError(error);
-		}
-		if(inspector.getLegajo().length()>6 || inspector.getLegajo().length()<6) {
-			FieldError error = new FieldError("inspector", "legajo", "El legajo debe contener 6 caracteres");
-			result.addError(error);
-		}
+		}else {
+			if(inspectorService.encontrarInspector(inspector)!=null) {
+				FieldError error = new FieldError("inspector", "dni", "Ya existe un inspector con ese dni");
+				result.addError(error);
+			}
+			if(inspectorService.findByLegajo(inspector.getLegajo())!=null) {
+				FieldError error = new FieldError("inspector", "legajo", "Ya existe un inspector con ese legajo");
+				result.addError(error);
+			}
+		}	
 		if(result.hasErrors()) {
 			return "modificarInspector";
 		}
@@ -59,11 +60,20 @@ public class ControladorInspectores {
 		return "redirect:/listaInspectores/";
 	}
 	
+	@PostMapping("/guardarInspectorYaExistente")
+	public String guardarInspectorYaExistente(@Valid Inspector inspector, BindingResult result) {
+		if(result.hasErrors()) {
+			return "editarInspector";
+		}
+		inspectorService.guardarInspectores(inspector);
+		return "redirect:/listaInspectores/";
+	}
+
 	@GetMapping("/editarInspector/{dnipersona}")
 	public String editarInspector(Inspector inspector, Model model) {
 		inspector = inspectorService.encontrarInspector(inspector);
 		model.addAttribute("inspector", inspector);
-		return "modificarInspector";
+		return "editarInspector";
 	}
 	@GetMapping("/eliminarInspector/{dnipersona}")
 	public String eliminarInspector(Inspector inspector) {

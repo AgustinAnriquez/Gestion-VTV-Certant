@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "inspeccion")
@@ -23,21 +23,27 @@ public class Inspeccion{
 	
 	@NotNull
 	@NotEmpty
+	@Pattern(regexp = "^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$", message="Formato fecha invalido, formato valido YYYY-MM-DD")
 	private String fecha;
 	
 	@NotEmpty
+	@Pattern(regexp ="([a][p][t][o]|[c][o][n][d][i][c][i][o][n][a][l]|[r][e][c][h][a][z][a][d][o])", message="Estado solo puede ser apto/condicional/rechazado(ingrese todo en minusculas)")
+	@NotNull
 	private String estado;
 	
 	@ManyToOne
 	@JoinColumn(name = "inspector", referencedColumnName="dnipersona")
+	@NotNull
 	private Inspector inspector;
 	
 	@ManyToOne
 	@JoinColumn(name = "propietario", referencedColumnName="dnipersona")
+	@NotNull
 	private Duenio propietario;
 	
 	@ManyToOne
 	@JoinColumn(name = "automovil", referencedColumnName="dominio")
+	@NotNull
 	private Automovil automovil;
 	
 	public Inspeccion() {}

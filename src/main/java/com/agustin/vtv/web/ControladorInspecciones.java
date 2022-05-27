@@ -67,6 +67,7 @@ public class ControladorInspecciones {
 			model.addAttribute("inspector", listaDeInspectores);
 			List<Automovil> listaDeAutomoviles = automovilService.listarAutomoviles();
 			model.addAttribute("automovil", listaDeAutomoviles);
+			System.out.println("Error de ejecucion");
 			return "modificarInspeccion";
 		}
 		inspeccionService.guardarInspeccion(inspeccion);

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml" ng-app="myApp">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="UTF-8">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -13,11 +13,8 @@
 	<h2 class="text-center">Datos del automovil</h2>
 	<a class="btn btn-secondary m-2" th:href="@{/listaAutomoviles/}">Regresar</a>
 	<br/>
-	<form class="container" th:action="@{/listaAutomoviles/guardarAutomovil}" method="post" th:object="${automovil}">	
-		<label class="form-label" for="dominio">Dominio:</label>
-		<input class="form-control" type="text" name="dominio" th:field="*{dominio}"/>
-		<span th:if="${#fields.hasErrors('dominio')}" th:errors="*{dominio}">Dominio error</span>
-		<br/>
+	<form class="container" th:action="@{/listaAutomoviles/guardarAutomovilYaExistente}" method="post" th:object="${automovil}">
+		<input type="hidden" name="idinspeccion" th:field="*{dominio}"/>
 		<div ng-app="myApp" ng-controller="ControladorAutomoviles">
 			<label class="form-label" for="marca">Marca:</label>
 			<select class="form-select" th:field="*{marca}" ng-model="marca" ng-options="marca.nombre for marca in datos track by marca.id">
@@ -42,11 +39,9 @@
 		<select class="form-select" th:field="*{propietario}">
 			<option th:each="prop:${propietario}" th:value="${prop.dnipersona}" th:text="${prop.nombre} +' '+${prop.apellido}+' '+${prop.dnipersona}"></option>
 		</select>
-		<span th:if="${#fields.hasErrors('propietario')}" th:errors="*{propietario}">Version error</span>
 		<br/>
 		<input class="btn btn-primary my-2" type="submit" name="guardarAutomovil" value="Guardar"/>
 	</form>
 	<footer th:replace="layout/plantilla :: footer"></footer>
-
 </body>
 </html>

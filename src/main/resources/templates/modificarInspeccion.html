@@ -15,7 +15,7 @@
 		<input type="hidden" name="idinspeccion" th:field="*{idinspeccion}"/>
 		<label class="form-label" for="fecha">Fecha:</label>
 		<input class="form-control" type="date" name="fecha" th:field="*{fecha}"/>
-		<span th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}">Fecha error</span>
+		<span th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}" >Fecha error</span>
 		<br/>
 		<label class="form-label" for="estado">Estado:</label>
 		<select  class="form-select" th:field="*{estado}">
@@ -23,25 +23,25 @@
 			<option th:value="condicional" th:text="condicional">
 			<option th:value="rechazado" th:text="rechazado">
 		</select>
-		<span th:if="${#fields.hasErrors('estado')}" th:errors="*{estado}">Estado error</span>
+		<span th:if="${#fields.hasErrors('estado')}" th:errors="*{estado}" >Estado error</span>
 		<br/>
 		<label class="form-label" for="inspector">Inspector:</label>
 		<select class="form-select" th:field="*{inspector}">
 			<option th:each="ins:${inspector}" th:value="${ins.dnipersona}" th:text="${ins.nombre} +' '+${ins.apellido}+' '+${ins.dnipersona}"></option>
 		</select>
-		<span th:if="${#fields.hasErrors('inspector')}" th:errors="*{inspector}">Inspector error</span>
+		<span th:if="${#fields.hasErrors('inspector')}" th:errors="*{inspector}" >Inspector error</span>
 		<br/>
 		<label class="form-label" for="propietario">Propietario:</label>
 		<select class="form-select" th:field="*{propietario}">
 			<option th:each="prop:${propietario}" th:value="${prop.dnipersona}" th:text="${prop.nombre} +' '+${prop.apellido}+' '+${prop.dnipersona}"></option>
 		</select>
-		<span th:if="${#fields.hasErrors('propietario')}" th:errors="*{propietario}">Propietario error</span>
+		<span th:if="${#fields.hasErrors('propietario')}" th:errors="*{propietario}" >Propietario error</span>
 		<br/>
 		<label class="form-label" for="automovil">Vehiculo:</label>
 		<select class="form-select" th:field="*{automovil}">
 			<option th:each="auto:${automovil}" th:value="${auto.dominio}" th:text="${auto.dominio}"></option>
 		</select>
-		<span th:if="${#fields.hasErrors('automovil')}" th:errors="*{automovil}">Vehiculo error</span>
+		<span th:if="${#fields.hasErrors('automovil')}" th:errors="*{automovil}" >Vehiculo error</span>
 		<br/>
 		<input class="btn btn-primary my-2" type="submit" name="guardarInspeccion" value="Guardar"/>
 	</form>

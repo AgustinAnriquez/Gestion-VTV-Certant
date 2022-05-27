@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.Valid;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -23,6 +24,7 @@ public class Version {
 	@ManyToOne
 	@JoinColumn(name="modelo_id")
 	@JsonIgnore
+	@Valid
 	private Modelos modelo;
 	
 	public Version() {
