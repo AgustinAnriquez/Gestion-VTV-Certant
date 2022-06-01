@@ -1,4 +1,4 @@
-package com.agustin.vtv.test.web;
+package com.agustin.vtv.domain.test;
 
 import static org.junit.Assert.assertEquals;
 

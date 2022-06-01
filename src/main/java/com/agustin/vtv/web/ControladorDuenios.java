@@ -41,6 +41,7 @@ public class ControladorDuenios {
 	
 	@PostMapping("/guardarDuenio")
 	public String guardarDuenio(@Valid Duenio duenio, BindingResult result) {
+		
 		if(duenio.getDnipersona()==null) {
 			FieldError error = new FieldError("duenio", "dnipersona", "El dni no puede estar vacio");
 			result.addError(error);

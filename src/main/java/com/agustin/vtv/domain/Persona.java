@@ -13,13 +13,14 @@ import javax.validation.constraints.NotNull;
 
 
 
+
 @Entity
 @Table(name = "persona")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Persona {
 
     @Id
-    @Column(name = "dnipersona", unique = true, nullable = false)
+    @Column(name = "dnipersona", unique = true)
     @Min(1000000)
     @Max(99999999)
     @NotNull
@@ -36,7 +37,7 @@ public class Persona {
     public Persona() {}
   
     public Persona(Long dnipersona, String nombre, String apellido) {
-		this.dnipersona=dnipersona;
+    	this.dnipersona=dnipersona;	
 		this.nombre = nombre;
 		this.apellido = apellido;
 	}
