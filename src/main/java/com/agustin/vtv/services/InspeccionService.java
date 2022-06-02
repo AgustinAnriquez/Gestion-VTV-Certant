@@ -8,9 +8,9 @@ public interface InspeccionService {
 	
 	public List<Inspeccion> listarInspecciones();
 	
-	public void guardarInspeccion(Inspeccion inpeccion);
+	public Inspeccion guardarInspeccion(Inspeccion inpeccion);
 	
-	public void eliminarInspeccion(Inspeccion inspeccion);
+	public boolean eliminarInspeccion(Inspeccion inspeccion);
 	
 	public Inspeccion encontrarInspeccion(Inspeccion inspeccion);
 	

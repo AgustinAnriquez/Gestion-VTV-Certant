@@ -21,7 +21,7 @@ public class InspectoresTest {
 	    Set<ConstraintViolation<Inspector>> violations = validator.validate(new Inspector());
 	        assertEquals(7, violations.size());
 	        violations.forEach(v -> System.out.println(
-	                v.getPropertyPath() + " : " + v.getMessageTemplate() + " = " + v.getMessage()));
+	               v.getPropertyPath() + " : " + v.getMessageTemplate() + " = " + v.getMessage()));
 	    }
 	
 	@Test
@@ -34,7 +34,7 @@ public class InspectoresTest {
 	
 	@Test
 	public void testInspectorDniMenor() {
-	    Set<ConstraintViolation<Inspector>> violations = validator.validate(new Inspector((long) 111111, "Agustin", "Anriquez", "AAAAAA"));
+	    Set<ConstraintViolation<Inspector>> violations = validator.validate(new Inspector("111111", "Agustin", "Anriquez", "AAAAAA"));
 	        assertEquals(1, violations.size());
 	        violations.forEach(v -> System.out.println(
 	                v.getPropertyPath() + " : " + v.getMessageTemplate() + " = " + v.getMessage()));
@@ -42,7 +42,7 @@ public class InspectoresTest {
 	
 	@Test
 	public void testInspectorNombreVacio() {
-	    Set<ConstraintViolation<Inspector>> violations = validator.validate(new Inspector((long) 41016682, "", "Anriquez", "AAAAAA"));
+	    Set<ConstraintViolation<Inspector>> violations = validator.validate(new Inspector("41016682", "", "Anriquez", "AAAAAA"));
 	        assertEquals(1, violations.size());
 	        violations.forEach(v -> System.out.println(
 	                v.getPropertyPath() + " : " + v.getMessageTemplate() + " = " + v.getMessage()));
@@ -50,7 +50,7 @@ public class InspectoresTest {
 	
 	@Test
 	public void testInspectorNombreNulo() {
-	    Set<ConstraintViolation<Inspector>> violations = validator.validate(new Inspector((long) 41016682, null, "Anriquez", "AAAAAA"));
+	    Set<ConstraintViolation<Inspector>> violations = validator.validate(new Inspector("41016682", null, "Anriquez", "AAAAAA"));
 	        assertEquals(2, violations.size());
 	        violations.forEach(v -> System.out.println(
 	                v.getPropertyPath() + " : " + v.getMessageTemplate() + " = " + v.getMessage()));
@@ -58,7 +58,7 @@ public class InspectoresTest {
 	
 	@Test
 	public void testInspectorApellidoVacio() {
-	    Set<ConstraintViolation<Inspector>> violations = validator.validate(new Inspector((long) 41016682, "Agustin", "", "AAAAAA"));
+	    Set<ConstraintViolation<Inspector>> violations = validator.validate(new Inspector("41016682", "Agustin", "", "AAAAAA"));
 	        assertEquals(1, violations.size());
 	        violations.forEach(v -> System.out.println(
 	                v.getPropertyPath() + " : " + v.getMessageTemplate() + " = " + v.getMessage()));
@@ -66,7 +66,7 @@ public class InspectoresTest {
 	
 	@Test
 	public void testInspectorApellidoNulo() {
-	    Set<ConstraintViolation<Inspector>> violations = validator.validate(new Inspector((long) 41016682, "Agustin", null, "AAAAA1"));
+	    Set<ConstraintViolation<Inspector>> violations = validator.validate(new Inspector("41016682", "Agustin", null, "AAAAA1"));
 	        assertEquals(2, violations.size());
 	        violations.forEach(v -> System.out.println(
 	                v.getPropertyPath() + " : " + v.getMessageTemplate() + " = " + v.getMessage()));
@@ -74,7 +74,7 @@ public class InspectoresTest {
 	
 	@Test
 	public void testInspectorLegajoVacio() {
-	    Set<ConstraintViolation<Inspector>> violations = validator.validate(new Inspector((long) 41016682, "Agustin", "Anriquez", ""));
+	    Set<ConstraintViolation<Inspector>> violations = validator.validate(new Inspector("41016682", "Agustin", "Anriquez", ""));
 	        assertEquals(2, violations.size());
 	        violations.forEach(v -> System.out.println(
 	                v.getPropertyPath() + " : " + v.getMessageTemplate() + " = " + v.getMessage()));
@@ -82,7 +82,7 @@ public class InspectoresTest {
 	
 	@Test
 	public void testInspectorLegajoNulo() {
-	    Set<ConstraintViolation<Inspector>> violations = validator.validate(new Inspector((long) 41016682, "Agustin", "Anriquez", null));
+	    Set<ConstraintViolation<Inspector>> violations = validator.validate(new Inspector("41016682", "Agustin", "Anriquez", null));
 	        assertEquals(2, violations.size());
 	        violations.forEach(v -> System.out.println(
 	                v.getPropertyPath() + " : " + v.getMessageTemplate() + " = " + v.getMessage()));
@@ -90,7 +90,7 @@ public class InspectoresTest {
 	
 	@Test
 	public void testInspectorLegajoMenor() {
-	    Set<ConstraintViolation<Inspector>> violations = validator.validate(new Inspector((long) 41016682, "Agustin", "Anriquez", "AAAA"));
+	    Set<ConstraintViolation<Inspector>> violations = validator.validate(new Inspector("41016682", "Agustin", "Anriquez", "AAAA"));
 	        assertEquals(1, violations.size());
 	        violations.forEach(v -> System.out.println(
 	                v.getPropertyPath() + " : " + v.getMessageTemplate() + " = " + v.getMessage()));
@@ -98,7 +98,7 @@ public class InspectoresTest {
 	
 	@Test
 	public void testInspectorLegajoMayor() {
-	    Set<ConstraintViolation<Inspector>> violations = validator.validate(new Inspector((long) 41016682, "Agustin", "Anriquez", "AAAAAAA"));
+	    Set<ConstraintViolation<Inspector>> violations = validator.validate(new Inspector("41016682", "Agustin", "Anriquez", "AAAAAAA"));
 	        assertEquals(1, violations.size());
 	        violations.forEach(v -> System.out.println(
 	                v.getPropertyPath() + " : " + v.getMessageTemplate() + " = " + v.getMessage()));

@@ -1,5 +1,7 @@
 package com.agustin.vtv.web;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -60,6 +63,11 @@ public class ControladorInspecciones {
 	@PostMapping("/guardarInspeccion")
 	public String guardarInspeccion(@Valid Inspeccion inspeccion, BindingResult result, Model model) {	
 		
+		if (ChronoUnit.MONTHS.between(inspeccion.getFecha(), LocalDate.now()) > 12){
+			FieldError error = new FieldError("inspeccion", "fecha", "fecha invalida, solo se permite menores a 1 año");
+			result.addError(error);
+		}
+		
 		if (result.hasErrors()) {
 			List<Duenio> listaDeDuenios = duenioService.listarDuenios();
 			model.addAttribute("propietario", listaDeDuenios);
@@ -91,6 +99,6 @@ public class ControladorInspecciones {
 	public String eliminarInspeccion(Inspeccion inspeccion) {
 		inspeccionService.eliminarInspeccion(inspeccion);
 		return "redirect:/listaInspecciones/";
-	}
+	}	
 	
 }

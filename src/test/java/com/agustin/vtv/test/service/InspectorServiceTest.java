@@ -18,7 +18,7 @@ public class InspectorServiceTest {
 	InspectorService inspectorServiceMock = Mockito.mock(InspectorService.class);
 	
 	@Mock
-	Inspector inspector= new Inspector((long) 5987385, "Beatriz", "Riquelme", "AAAAAA");
+	Inspector inspector= new Inspector("5987385", "Beatriz", "Riquelme", "AAAAAA");
 	
 	@Test
 	void listarInspectores() {
@@ -41,6 +41,11 @@ public class InspectorServiceTest {
 	@Test
 	void encontrarInspector() {
 		Mockito.when(inspectorServiceMock.encontrarInspector(inspector)).thenReturn(inspector);
+	}
+	
+	@Test
+	void encontrarInspectorByLegajo() {
+		Mockito.when(inspectorServiceMock.findByLegajo(inspector.getLegajo())).thenReturn(inspector);
 	}
 	
 }

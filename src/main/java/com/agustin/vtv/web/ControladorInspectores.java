@@ -40,18 +40,13 @@ public class ControladorInspectores {
 	
 	@PostMapping("/guardarInspector")
 	public String guardarInspector(@Valid Inspector inspector, BindingResult result) {
-		if(inspector.getDnipersona()==null) {
-			FieldError error = new FieldError("duenio", "dnipersona", "El dni no puede estar vacio");
+		if(inspectorService.encontrarInspector(inspector)!=null) {
+			FieldError error = new FieldError("inspector", "dni", "Ya existe un inspector con ese dni");
 			result.addError(error);
-		}else {
-			if(inspectorService.encontrarInspector(inspector)!=null) {
-				FieldError error = new FieldError("inspector", "dni", "Ya existe un inspector con ese dni");
-				result.addError(error);
-			}
-			if(inspectorService.findByLegajo(inspector.getLegajo())!=null) {
-				FieldError error = new FieldError("inspector", "legajo", "Ya existe un inspector con ese legajo");
-				result.addError(error);
-			}
+		}
+		if(inspectorService.findByLegajo(inspector.getLegajo())!=null) {
+			FieldError error = new FieldError("inspector", "legajo", "Ya existe un inspector con ese legajo");
+			result.addError(error);
 		}	
 		if(result.hasErrors()) {
 			return "modificarInspector";

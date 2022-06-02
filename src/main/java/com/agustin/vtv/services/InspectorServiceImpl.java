@@ -24,14 +24,19 @@ public class InspectorServiceImpl implements InspectorService{
 
 	@Override
 	@Transactional
-	public void guardarInspectores(Inspector inspector) {
-		inspectorDao.save(inspector);
+	public Inspector guardarInspectores(Inspector inspector) {
+		return inspectorDao.save(inspector);
 	}
 
 	@Override
 	@Transactional
-	public void eliminarInspector(Inspector inspector) {
+	public boolean eliminarInspector(Inspector inspector) {
+		try {
 		inspectorDao.delete(inspector);
+		return true;
+		}catch(Exception err) {
+			return false;
+		}
 	}
 
 	@Override

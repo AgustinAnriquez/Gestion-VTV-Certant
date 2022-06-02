@@ -23,14 +23,19 @@ public class InspeccionServiceImpl implements InspeccionService{
 
 	@Override
 	@Transactional
-	public void guardarInspeccion(Inspeccion inspeccion) {
-		inspeccionDao.save(inspeccion);
+	public Inspeccion guardarInspeccion(Inspeccion inspeccion) {
+		return inspeccionDao.save(inspeccion);
 	}
 
 	@Override
 	@Transactional
-	public void eliminarInspeccion(Inspeccion inspeccion) {
+	public boolean eliminarInspeccion(Inspeccion inspeccion) {
+		try {
 		inspeccionDao.delete(inspeccion);
+		return true;
+		}catch(Exception err) {
+			return false;
+		}
 	}
 
 	@Override

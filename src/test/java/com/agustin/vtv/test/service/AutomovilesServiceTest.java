@@ -23,7 +23,7 @@ public class AutomovilesServiceTest {
 	
 	AutomovilService automovilServiceMock = Mockito.mock(AutomovilService.class);
 	
-	Duenio propietario= new Duenio((long) 41016682, "Agustin", "Anriquez", "comun");
+	Duenio propietario= new Duenio("41016682", "Agustin", "Anriquez", "comun");
 	List<Version> listaVersionesAutomoviles =  new ArrayList<Version>();
 	List<Modelos> listaModelosAutomoviles =  new ArrayList<Modelos>();
 	Marcas marcaAutomovil = new Marcas(1, "Volskwaken", listaModelosAutomoviles);

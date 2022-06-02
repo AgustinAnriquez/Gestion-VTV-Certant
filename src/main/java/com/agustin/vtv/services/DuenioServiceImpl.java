@@ -23,14 +23,19 @@ public class DuenioServiceImpl implements DuenioService{
 
 	@Override
 	@Transactional
-	public void guardarDuenio(Duenio duenio) {
-			duenioDao.save(duenio);	
+	public Duenio guardarDuenio(Duenio duenio) {
+		return duenioDao.save(duenio);
 	}
 
 	@Override
 	@Transactional
-	public void eliminarDuenio(Duenio duenio) {
-		duenioDao.delete(duenio);	
+	public boolean eliminarDuenio(Duenio duenio) {
+		try {
+		duenioDao.delete(duenio);
+		return true;
+		}catch(Exception err) {
+			return false;
+		}
 	}
 
 	@Override

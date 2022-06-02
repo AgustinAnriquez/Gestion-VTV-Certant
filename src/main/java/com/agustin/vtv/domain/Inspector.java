@@ -17,11 +17,9 @@ public class Inspector extends Persona{
 	@Size(min = 5, max = 6)
 	private String legajo;
 
-	public Inspector() {
-		
-	}
+	public Inspector() {}
 	
-	public Inspector(Long dnipersona, String nombre, String apellido, String legajo) {
+	public Inspector(String dnipersona, String nombre, String apellido, String legajo) {
 		super(dnipersona, nombre, apellido);
 		this.legajo = legajo;
 	}

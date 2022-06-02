@@ -27,7 +27,7 @@ public class AutomovilesTest {
 	private Marcas marcaAutomovil = new Marcas(1, "Volskwaken", listaModelosAutomoviles);
 	private Modelos modelosAutomovil= new Modelos(1, "gol", marcaAutomovil, listaVersionesAutomoviles);
 	private Version versionesAutomoviles = new Version(1, "2001", modelosAutomovil);
-	private Duenio propietario = new Duenio( (long) 41016682, "Agustin", "Anriquez", "comun");
+	private Duenio propietario = new Duenio( "41016682", "Agustin", "Anriquez", "comun");
 	
 	
 	@Test

@@ -12,9 +12,9 @@ public interface InspectorService {
 	
 	public Inspector findByLegajo(@Param("legajo") String legajo);
 	
-	public void guardarInspectores(Inspector inspector);
+	public Inspector guardarInspectores(Inspector inspector);
 	
-	public void eliminarInspector(Inspector inspector);
+	public boolean eliminarInspector(Inspector inspector);
 	
 	public Inspector encontrarInspector(Inspector inspector);
 	

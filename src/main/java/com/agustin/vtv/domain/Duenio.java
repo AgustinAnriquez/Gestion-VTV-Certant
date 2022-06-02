@@ -15,11 +15,9 @@ public class Duenio extends Persona{
 	@Pattern(regexp ="([c][o][m][u][n]|[e][x][e][n][t][o])", message="Estado solo puede ser comun/exento (ingrese todo en minusculas)")
     private String tipo; 
 
-    public Duenio() {
-    	
-    }
+    public Duenio() {}
     
-	public Duenio(Long dnipersona, String nombre, String apellido, String tipo) {
+	public Duenio(String dnipersona, String nombre, String apellido, String tipo) {
 		super(dnipersona, nombre, apellido);
 		this.tipo = tipo;
 	}

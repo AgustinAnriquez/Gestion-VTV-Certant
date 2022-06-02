@@ -6,6 +6,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.agustin.vtv.domain.Duenio;
 
-public interface DuenioDao extends CrudRepository<Duenio, Long>{
+public interface DuenioDao extends CrudRepository<Duenio, String>{
 	
 }

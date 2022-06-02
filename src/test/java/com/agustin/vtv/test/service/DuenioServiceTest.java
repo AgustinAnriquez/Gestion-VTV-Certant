@@ -18,7 +18,7 @@ public class DuenioServiceTest {
 	DuenioService duenioServiceMock = Mockito.mock(DuenioService.class);
 	
 	@Mock
-	Duenio propietario= new Duenio((long) 41016682, "Agustin", "Anriquez", "comun");
+	Duenio propietario= new Duenio("41016682", "Agustin", "Anriquez", "comun");
 	
 	@Test
 	void listarDuenios() {

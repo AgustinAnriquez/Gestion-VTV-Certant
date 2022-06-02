@@ -1,6 +1,7 @@
 package com.agustin.vtv.web;
 
 
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,16 +42,11 @@ public class ControladorDuenios {
 	
 	@PostMapping("/guardarDuenio")
 	public String guardarDuenio(@Valid Duenio duenio, BindingResult result) {
-		
-		if(duenio.getDnipersona()==null) {
-			FieldError error = new FieldError("duenio", "dnipersona", "El dni no puede estar vacio");
+		if(duenioService.encontrarDuenio(duenio)!=null) {
+			FieldError error = new FieldError("duenio", "dnipersona", "Ya existe un propietario con ese dni");
 			result.addError(error);
-		}else {
-			if(duenioService.encontrarDuenio(duenio)!=null) {
-				FieldError error = new FieldError("duenio", "dnipersona", "Ya existe un propietario con ese dni");
-				result.addError(error);
-			}
-		}		
+		}
+				
 		if(result.hasErrors()) {
 			return "modificarDuenio";
 		}

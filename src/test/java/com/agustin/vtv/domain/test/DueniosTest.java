@@ -26,7 +26,7 @@ public class DueniosTest {
 	
 	@Test
 	public void testDuenioDniMenor() {
-	    Set<ConstraintViolation<Duenio>> violations = validator.validate(new Duenio( (long) 100000, "Agustin", "Anriquez", "comun"));
+	    Set<ConstraintViolation<Duenio>> violations = validator.validate(new Duenio( "100000", "Agustin", "Anriquez", "comun"));
 	        assertEquals(1, violations.size());
 	        violations.forEach(v -> System.out.println(
 	                v.getPropertyPath() + " : " + v.getMessageTemplate() + " = " + v.getMessage()));
@@ -34,7 +34,7 @@ public class DueniosTest {
 	
 	@Test
 	public void testDuenioDniMayor() {
-	    Set<ConstraintViolation<Duenio>> violations = validator.validate(new Duenio( (long)111100000, "Agustin", "Anriquez", "comun"));
+	    Set<ConstraintViolation<Duenio>> violations = validator.validate(new Duenio( "111100000", "Agustin", "Anriquez", "comun"));
 	        assertEquals(1, violations.size());
 	        violations.forEach(v -> System.out.println(
 	                v.getPropertyPath() + " : " + v.getMessageTemplate() + " = " + v.getMessage()));
@@ -50,7 +50,7 @@ public class DueniosTest {
 	
 	@Test
 	public void testDuenioNombreVacio() {
-	    Set<ConstraintViolation<Duenio>> violations = validator.validate(new Duenio( (long) 41016682, "", "Anriquez", "comun"));
+	    Set<ConstraintViolation<Duenio>> violations = validator.validate(new Duenio( "41016682", "", "Anriquez", "comun"));
 	        assertEquals(1, violations.size());
 	        violations.forEach(v -> System.out.println(
 	                v.getPropertyPath() + " : " + v.getMessageTemplate() + " = " + v.getMessage()));
@@ -58,7 +58,7 @@ public class DueniosTest {
 	
 	@Test
 	public void testDuenioNombreNulo() {
-	    Set<ConstraintViolation<Duenio>> violations = validator.validate(new Duenio( (long) 41016682, null, "Anriquez", "comun"));
+	    Set<ConstraintViolation<Duenio>> violations = validator.validate(new Duenio( "41016682", null, "Anriquez", "comun"));
 	        assertEquals(2, violations.size());
 	        violations.forEach(v -> System.out.println(
 	                v.getPropertyPath() + " : " + v.getMessageTemplate() + " = " + v.getMessage()));
@@ -66,7 +66,7 @@ public class DueniosTest {
 	
 	@Test
 	public void testDuenioApellidoVacio() {
-	    Set<ConstraintViolation<Duenio>> violations = validator.validate(new Duenio( (long) 41016682, "Agustin", "", "comun"));
+	    Set<ConstraintViolation<Duenio>> violations = validator.validate(new Duenio( "41016682", "Agustin", "", "comun"));
 	        assertEquals(1, violations.size());
 	        violations.forEach(v -> System.out.println(
 	                v.getPropertyPath() + " : " + v.getMessageTemplate() + " = " + v.getMessage()));
@@ -74,7 +74,7 @@ public class DueniosTest {
 	
 	@Test
 	public void testDuenioApellidoNulo() {
-	    Set<ConstraintViolation<Duenio>> violations = validator.validate(new Duenio( (long) 41016682, "Agustin", null, "comun"));
+	    Set<ConstraintViolation<Duenio>> violations = validator.validate(new Duenio( "41016682", "Agustin", null, "comun"));
 	        assertEquals(2, violations.size());
 	        violations.forEach(v -> System.out.println(
 	                v.getPropertyPath() + " : " + v.getMessageTemplate() + " = " + v.getMessage()));
@@ -82,28 +82,28 @@ public class DueniosTest {
 	
 	@Test
 	public void testDuenioTipoNulo() {
-	    Set<ConstraintViolation<Duenio>> violations = validator.validate(new Duenio( (long) 41016682, "Agustin", "Anriquez", null));
+	    Set<ConstraintViolation<Duenio>> violations = validator.validate(new Duenio( "41016682", "Agustin", "Anriquez", null));
 	        assertEquals(1, violations.size());
 	        violations.forEach(v -> System.out.println(
 	                v.getPropertyPath() + " : " + v.getMessageTemplate() + " = " + v.getMessage()));
 	    }
 	@Test
 	public void testDuenioTipoInvalido() {
-	    Set<ConstraintViolation<Duenio>> violations = validator.validate(new Duenio( (long) 41016682, "Agustin", "Anriquez", "ss"));
+	    Set<ConstraintViolation<Duenio>> violations = validator.validate(new Duenio( "41016682", "Agustin", "Anriquez", "ss"));
 	        assertEquals(1, violations.size());
 	        violations.forEach(v -> System.out.println(
 	                v.getPropertyPath() + " : " + v.getMessageTemplate() + " = " + v.getMessage()));
 	    }
 	@Test
 	public void testDuenioTiposValidos1() {
-	    Set<ConstraintViolation<Duenio>> violations = validator.validate(new Duenio( (long) 41016682, "Agustin", "Anriquez", "comun"));
+	    Set<ConstraintViolation<Duenio>> violations = validator.validate(new Duenio( "41016682", "Agustin", "Anriquez", "comun"));
 	        assertEquals(0, violations.size());
 	        violations.forEach(v -> System.out.println(
 	                v.getPropertyPath() + " : " + v.getMessageTemplate() + " = " + v.getMessage()));
 	    }
 	@Test
 	public void testDuenioTiposValidos2() {
-	    Set<ConstraintViolation<Duenio>> violations = validator.validate(new Duenio( (long) 41016682, "Agustin", "Anriquez", "exento"));
+	    Set<ConstraintViolation<Duenio>> violations = validator.validate(new Duenio("41016682", "Agustin", "Anriquez", "exento"));
 	        assertEquals(0, violations.size());
 	        violations.forEach(v -> System.out.println(
 	                v.getPropertyPath() + " : " + v.getMessageTemplate() + " = " + v.getMessage()));

@@ -6,10 +6,10 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 
 
 
@@ -20,11 +20,10 @@ import javax.validation.constraints.NotNull;
 public class Persona {
 
     @Id
-    @Column(name = "dnipersona", unique = true)
-    @Min(1000000)
-    @Max(99999999)
+    @Column(name = "dnipersona")
     @NotNull
-	private Long dnipersona;
+    @Pattern(regexp="([1-9][0-9]{7}|[1-9][0-9]{6})", message="formato dni invalido, formatos validos=1234567 o 12345678")
+	private String dnipersona;
 	
 	@NotEmpty(message = "nombre no puede estar vacio")
 	@NotNull(message = "nombre no puede ser nulo")
@@ -36,18 +35,18 @@ public class Persona {
     
     public Persona() {}
   
-    public Persona(Long dnipersona, String nombre, String apellido) {
+    public Persona(String dnipersona, String nombre, String apellido) {
     	this.dnipersona=dnipersona;	
 		this.nombre = nombre;
 		this.apellido = apellido;
 	}
 
 
-	public Long getDnipersona() {
+	public String getDnipersona() {
 		return dnipersona;
 	}
     
-	public void setDnipersona(Long dnipersona) {
+	public void setDnipersona(String dnipersona) {
 		this.dnipersona = dnipersona;
 	}
 

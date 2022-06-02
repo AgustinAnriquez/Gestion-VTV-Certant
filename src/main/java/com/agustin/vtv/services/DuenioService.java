@@ -8,9 +8,9 @@ public interface DuenioService {
 	
 	public List<Duenio> listarDuenios();
 	
-	public void guardarDuenio(Duenio duenio);
+	public Duenio guardarDuenio(Duenio duenio);
 	
-	public void eliminarDuenio(Duenio duenio);
+	public boolean eliminarDuenio(Duenio duenio);
 	
 	public Duenio encontrarDuenio(Duenio duenio);
 	

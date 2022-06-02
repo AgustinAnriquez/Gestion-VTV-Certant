@@ -23,14 +23,19 @@ public class AutomovilServiceImpl implements AutomovilService{
 
 	@Override
 	@Transactional
-	public void guardarAutomovil(Automovil automovil) {
-		automovilDao.save(automovil);
+	public Automovil guardarAutomovil(Automovil automovil) {
+		return automovilDao.save(automovil);
 	}
 
 	@Override
 	@Transactional
-	public void eliminarAutomovil(Automovil automovil) {
-		automovilDao.delete(automovil);
+	public boolean eliminarAutomovil(Automovil automovil) {
+		try {
+			automovilDao.delete(automovil);
+			return true;
+			}catch(Exception err) {
+				return false;
+			}
 	}
 
 	@Override
